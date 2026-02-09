@@ -1,0 +1,641 @@
+<!DOCTYPE html><html lang="he" dir="rtl"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>די.אמ.אס | בית דפוס</title>
+  <meta name="description" content="Home - די.אמ.אס provides professional דפוס ושירותי עיצוב גרפי services. Specializing in בית דפוס.">
+  <meta name="keywords" content="בית דפוס, בית דפוס בחיפה, הדפסת הזמנות לחתונה בחיפה, הדפסת מודעות אבל בחיפה">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="די.אמ.אס | בית דפוס">
+  <meta property="og:description" content="Home - די.אמ.אס provides professional דפוס ושירותי עיצוב גרפי services. Specializing in בית דפוס.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="די.אמ.אס | בית דפוס">
+  <meta name="twitter:description" content="Home - די.אמ.אס provides professional דפוס ושירותי עיצוב גרפי services. Specializing in בית דפוס.">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: '33985884-606d-4827-aac4-b79b6fffe446',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="די.אמ.אס" class="logo" />
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu"><li><a href="/services">מוצרים ושירותים</a></li><li><a href="/portfolio">תיק עבודות</a></li></ul>
+    
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+  
+  <main>
+    <section class="home-hero-section" data-layout-spec="Home-Hero" data-hero-type="fullscreen-scrim">
+  <div class="home-hero-section__bg-wrapper">
+    <img data-placeholder="home-hero-bg" data-context="Professional printing studio workspace in bright natural lighting: a clean white surface displaying finished print products including colorful postcards, elegant wedding invitations with gold foil details, professional business folders, and vibrant outdoor signage samples. Products arranged in an organized, inspiring layout that showcases quality and variety. Bright, crisp photography with soft shadows, professional color accuracy, and a sense of reliability and craftsmanship. Studio lighting from above creates gentle highlights on glossy finishes." width="1920" height="1080" src="/assets/site-home-hero-bg.webp" alt="מוצרי דפוס מקצועיים - גלויות, הזמנות, פולדרים ושילוט" class="home-hero-section__bg-image">
+    <div class="home-hero-section__scrim" aria-hidden="true"></div>
+  </div>
+  
+  <div class="home-hero-section__content-wrapper">
+    <div class="home-hero-section__overlay-card">
+      <h1 class="home-hero-section__headline">דפוס מהיר ואמין עם עיצוב גרפי מקצועי</h1>
+      <h3 class="home-hero-section__subtitle">מגלויות והזמנות ועד פולדרים ושילוט – אנחנו מבטיחים הגהה קפדנית, צבעים עקביים ומסירה בזמן. שירות מקצועי שאפשר לסמוך עליו.</h3>
+      <div class="home-hero-section__cta-row">
+        <a href="#contact" class="home-hero-section__btn home-hero-section__btn--primary">קבלו הצעת מחיר</a>
+        <a href="#services" class="home-hero-section__btn home-hero-section__btn--secondary">גלו את המוצרים</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="home-hero-section__divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="home-hero-divider-shadow">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur>
+          <feOffset dx="0" dy="1" result="offsetblur"></feOffset>
+          <feComponentTransfer>
+            <feFuncA type="linear" slope="0.15"></feFuncA>
+          </feComponentTransfer>
+          <feMerge>
+            <feMergeNode></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+          </feMerge>
+        </filter>
+      </defs>
+      <path d="M0,60 L0,15 L1200,25 L1200,60 Z" fill="var(--bg-light)" filter="url(#home-hero-divider-shadow)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-benefits-section" data-layout-spec="Home-benefits">
+  <div class="home-benefits-container">
+    <div class="home-benefits-header">
+      <h2>למה לקוחות בוטחים בבית הדפוס שלנו</h2>
+      <p class="home-benefits-intro">אנחנו מבינים שכל פרויקט הדפסה חשוב לכם. לכן אנחנו מתחייבים לעבודה שקופה, מקצועית ואמינה בכל שלב – מהעיצוב ועד למסירה.</p>
+    </div>
+    
+    <div class="home-benefits-grid">
+      <div class="home-benefits-card">
+        <div class="home-benefits-icon-wrapper">
+          <svg data-element-type="icon" data-icon-type="svg" class="home-benefits-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3>תהליך אישור ברור</h3>
+        <p>לפני כל הדפסה, אתם מקבלים הדמיה מדויקת לאישור. אנחנו לא מתחילים עד שאתם מרוצים לחלוטין מהתוצאה הצפויה.</p>
+      </div>
+      
+      <div class="home-benefits-card">
+        <div class="home-benefits-icon-wrapper">
+          <svg data-element-type="icon" data-icon-type="svg" class="home-benefits-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"></circle>
+            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <h3>זמני אספקה אמינים</h3>
+        <p>אנחנו מתחייבים לזמני ביצוע ברורים ומציאותיים. תיאום איסוף או משלוח מראש, כך שתוכלו לתכנן את הפרויקט שלכם בביטחון.</p>
+      </div>
+      
+      <div class="home-benefits-card">
+        <div class="home-benefits-icon-wrapper">
+          <svg data-element-type="icon" data-icon-type="svg" class="home-benefits-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <h3>ייעוץ בחומרים וצבעים</h3>
+        <p>לא בטוחים איזה נייר או גוון מתאים? אנחנו מציעים המלצות מקצועיות על סוגי נייר, עובי וגימורים שיתאימו בדיוק לצרכים שלכם.</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="home-benefits-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="perforation-pattern" x="0" y="0" width="30" height="40" patternUnits="userSpaceOnUse">
+          <circle cx="15" cy="20" r="3" fill="var(--bg-light)"></circle>
+        </pattern>
+      </defs>
+      <rect x="0" y="0" width="1200" height="40" fill="var(--bg-light)"></rect>
+      <line x1="0" y1="20" x2="1200" y2="20" stroke="var(--border-light)" stroke-width="1" stroke-dasharray="8,4"></line>
+      <rect x="0" y="0" width="1200" height="40" fill="url(#perforation-pattern)"></rect>
+    </svg>
+  </div>
+</section>
+
+<section class="home-products-section" data-layout-spec="Home-products">
+  <div class="home-products-container">
+    <div class="home-products-header">
+      <h2>המוצרים הפופולריים שלנו</h2>
+      <p>מגוון פתרונות הדפסה מקצועיים לכל צורך - מגלויות ועד שילוט מרשים</p>
+    </div>
+
+    <div class="home-products-grid">
+      <article class="home-products-card">
+        <div class="home-products-card-image">
+          <img data-placeholder="home-products-image-1" data-context="Professional studio photograph of elegant printed postcards on white background, showing high-quality printing with vibrant colors, crisp edges, multiple postcards fanned out to show variety, clean minimalist composition, bright studio lighting" width="600" height="450" src="/assets/site-home-products-image-1.webp" alt="גלויות מודפסות באיכות גבוהה">
+        </div>
+        <div class="home-products-card-content">
+          <h3>גלויות</h3>
+          <p>מושלמות לאירועים, תודות ואיחולים. זמן אספקה: 2-3 ימי עסקים.</p>
+        </div>
+      </article>
+
+      <article class="home-products-card">
+        <div class="home-products-card-image">
+          <img data-placeholder="home-products-image-2" data-context="Professional studio photograph of elegant wedding invitation cards on white background, showing premium paper quality with embossed details, luxury finish, multiple invitations arranged beautifully, clean minimalist composition, bright studio lighting" width="600" height="450" src="/assets/site-home-products-image-2.webp" alt="הזמנות לחתונה מודפסות">
+        </div>
+        <div class="home-products-card-content">
+          <h3>הזמנות</h3>
+          <p>הזמנות מעוצבות לחתונות, אירועים ומסיבות. זמן אספקה: 3-5 ימי עסקים.</p>
+        </div>
+      </article>
+
+      <article class="home-products-card">
+        <div class="home-products-card-image">
+          <img data-placeholder="home-products-image-3" data-context="Professional studio photograph of colorful printed flyers on white background, showing vibrant promotional materials with sharp text and graphics, multiple flyers stacked and fanned, clean minimalist composition, bright studio lighting" width="600" height="450" src="/assets/site-home-products-image-3.webp" alt="פליירים מודפסים לפרסום">
+        </div>
+        <div class="home-products-card-content">
+          <h3>פליירים</h3>
+          <p>כלי שיווק יעיל לקידום עסקים ואירועים. זמן אספקה: 1-2 ימי עסקים.</p>
+        </div>
+      </article>
+
+      <article class="home-products-card">
+        <div class="home-products-card-image">
+          <img data-placeholder="home-products-image-4" data-context="Professional studio photograph of colorful printed stickers and labels on white background, showing various shapes and sizes, glossy finish, die-cut designs, multiple stickers arranged attractively, clean minimalist composition, bright studio lighting" width="600" height="450" src="/assets/site-home-products-image-4.webp" alt="מדבקות ותוויות מודפסות">
+        </div>
+        <div class="home-products-card-content">
+          <h3>מדבקות ותוויות</h3>
+          <p>פתרונות מיתוג ותיוג למוצרים ואריזות. זמן אספקה: 2-4 ימי עסקים.</p>
+        </div>
+      </article>
+
+      <article class="home-products-card">
+        <div class="home-products-card-image">
+          <img data-placeholder="home-products-image-5" data-context="Professional studio photograph of elegant presentation folders on white background, showing professional business folders with pockets, premium cardstock material, multiple folders displayed open and closed, clean minimalist composition, bright studio lighting" width="600" height="450" src="/assets/site-home-products-image-5.webp" alt="תיקיות מצגת מקצועיות">
+        </div>
+        <div class="home-products-card-content">
+          <h3>תיקיות מצגת</h3>
+          <p>מצגות מקצועיות לחברות וארגונים. זמן אספקה: 3-5 ימי עסקים.</p>
+        </div>
+      </article>
+
+      <article class="home-products-card">
+        <div class="home-products-card-image">
+          <img data-placeholder="home-products-image-6" data-context="Professional studio photograph of printed signage boards on white background, showing rigid foam boards with vibrant graphics, professional business signs, multiple sizes displayed, clean minimalist composition, bright studio lighting" width="600" height="450" src="/assets/site-home-products-image-6.webp" alt="לוחות שילוט מודפסים">
+        </div>
+        <div class="home-products-card-content">
+          <h3>לוחות שילוט</h3>
+          <p>שילוט איכותי לחנויות, תערוכות ואירועים. זמן אספקה: 3-7 ימי עסקים.</p>
+        </div>
+      </article>
+    </div>
+
+    <div class="home-products-cta-wrapper">
+      <p>מעוניינים במידות מיוחדות או גימורים ייחודיים? נשמח לספק לכם הצעת מחיר מותאמת אישית.</p>
+      <a href="#contact" class="home-products-cta-button">קבלו הצעת מחיר</a>
+    </div>
+  </div>
+
+  <div class="home-products-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="home-products-wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#1E73BE;stop-opacity:0.15"></stop>
+          <stop offset="100%" style="stop-color:#1E73BE;stop-"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,60 L0,25 Q100,22 200,28 T400,25 Q500,28 600,22 T800,28 Q900,25 1000,22 T1200,28 L1200,60 Z" fill="url(#home-products-wave-gradient)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="home-steps-section" data-layout-spec="Home-steps">
+  <div class="home-steps-container">
+    <h2 class="home-steps-title">תהליך עבודה פשוט ומהיר</h2>
+    
+    <div class="home-steps-grid">
+      <div class="home-steps-item">
+        <div class="home-steps-icon-wrapper">
+          <svg data-element-type="icon" data-icon-type="svg" class="home-steps-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"></rect>
+            <path d="M9 9h6M9 12h6M9 15h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="home-steps-number">1</div>
+        <h3 class="home-steps-subtitle">בחירת מוצר ומפרט</h3>
+        <p class="home-steps-description">בחרו את סוג ההדפסה הרצוי – הזמנות, גלויות, פולדרים או שילוט – והגדירו את הכמות והמפרטים הטכניים.</p>
+      </div>
+
+      <div class="home-steps-connector"></div>
+
+      <div class="home-steps-item">
+        <div class="home-steps-icon-wrapper">
+          <svg data-element-type="icon" data-icon-type="svg" class="home-steps-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M3 12h7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="home-steps-number">2</div>
+        <h3 class="home-steps-subtitle">שליחת פרטים וקבלת הצעת מחיר</h3>
+        <p class="home-steps-description">שלחו לנו את הפרטים והקבצים, ותקבלו הצעת מחיר ברורה ומפורטת תוך זמן קצר.</p>
+      </div>
+
+      <div class="home-steps-connector"></div>
+
+      <div class="home-steps-item">
+        <div class="home-steps-icon-wrapper">
+          <svg data-element-type="icon" data-icon-type="svg" class="home-steps-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"></circle>
+            <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+            <circle cx="12" cy="12" r="2" fill="var(--accent)"></circle>
+          </svg>
+        </div>
+        <div class="home-steps-number">3</div>
+        <h3 class="home-steps-subtitle">הגהה ואישור</h3>
+        <p class="home-steps-description">נשלח לכם הדמיה לאישור סופי לפני תחילת ההדפסה, כדי להבטיח תוצאה מושלמת.</p>
+      </div>
+
+      <div class="home-steps-connector"></div>
+
+      <div class="home-steps-item">
+        <div class="home-steps-icon-wrapper">
+          <svg data-element-type="icon" data-icon-type="svg" class="home-steps-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 8v12a2 2 0 01-2 2H6a2 2 0 01-2-2V8" stroke="currentColor" stroke-width="1.5"></path>
+            <path d="M12 12v8M8 16h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+            <path d="M3 8h18l-2-6H5L3 8z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+        <div class="home-steps-number">4</div>
+        <h3 class="home-steps-subtitle">הדפסה ואיסוף</h3>
+        <p class="home-steps-description">נדפיס את ההזמנה במקצועיות ונתאם איסוף או משלוח נוח עבורכם.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-steps-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="home-steps-clip">
+          <path d="M0,100 L0,30 Q100,25 200,30 T400,25 Q500,30 600,25 T800,30 Q900,25 1000,30 T1200,25 L1200,100 Z"></path>
+        </clipPath>
+      </defs>
+      <rect width="1200" height="100" fill="var(--bg-dark)" clip-path="url(#home-steps-clip)"></rect>
+    </svg>
+  </div>
+</section>
+
+<section class="home-cta-section" data-layout-spec="Home-cta">
+  <div class="home-cta-section__container">
+    <h2 class="home-cta-section__heading">מוכנים להדפיס?</h2>
+    <p class="home-cta-section__text">אנחנו כאן כדי לעזור לכם בכל שלב – מייעוץ בבחירת הפורמט המתאים ועד הכנת קבצים להדפסה. צוות המומחים שלנו מגיב במהירות ומלווה אתכם עד לקבלת התוצר המושלם.</p>
+    <div class="home-cta-section__buttons">
+      <a href="/contact" class="home-cta-section__btn home-cta-section__btn--primary">צרו קשר</a>
+      <a href="/portfolio" class="home-cta-section__btn home-cta-section__btn--secondary">צפו בעבודות שלנו</a>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer" dir="rtl"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"><div class="footer-container"><div class="footer-content"><div class="footer-section company-info"><img src="/assets/business-logo.webp" alt="די.אמ.אס" class="logo" /><p class="company-description">דפוס ושירותי עיצוב גרפי מקצועיים ברמה הגבוהה ביותר. אנו מספקים פתרונות יצירתיים ומותאמים אישית לכל לקוח.</p></div><div class="footer-section quick-links"><h3>קישורים מהירים</h3><ul><li><a href="/services">מוצרים ושירותים</a></li><li><a href="/portfolio">תיק עבודות</a></li><li><a href="/contact">צור קשר</a></li></ul></div><div class="footer-section contact-info"><h3>יצירת קשר</h3><ul><li><i class="fas fa-envelope"></i><a href="mailto:[business_email]">[business_email]</a></li><li><i class="fas fa-phone"></i><a href="tel:[business_phone]">[business_phone]</a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div><div class="footer-section social-media"><h3>עקבו אחרינו</h3><div class="social-icons"><a href="[facebook_handle]" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="footer-bottom"><div class="legal-links"><a href="/privacy">מדיניות פרטיות</a><span class="separator">|</span><a href="/terms">תנאי שימוש</a><span class="separator">|</span><a href="/accessibility">הצהרת נגישות</a></div><div class="copyright"><p>© 2026 די.אמ.אס. כל הזכויות שמורות.</p></div><div class="attribution"><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
